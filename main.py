@@ -20,11 +20,11 @@ def do_right_years(years):
 
 if __name__ == '__main__':
     
-    excel_data_df_wine3 = pandas.read_excel(
-    'wine3.xlsx', sheet_name='Лист1',
+    excel_spreadsheet_of_wine = pandas.read_excel(
+    'wine.xlsx', sheet_name='Лист1',
     na_values=['N/A', 'NA'], keep_default_na=False
     )
-    all_products = excel_data_df_wine3.to_dict(orient='records')
+    all_products = excel_spreadsheet_of_wine.to_dict(orient='records')
 
     list_drinks = []
     list_white_wine = []
@@ -42,9 +42,9 @@ if __name__ == '__main__':
             list_drinks.append(product)
             dict_of_all_drinks[category] = list_drinks
 
-    first_date = date(1920, 1, 1)
-    second_date = date.today()
-    years = second_date.year - first_date.year
+    date_of_the_start_of_sales = date(1920, 1, 1)
+    today_s_date = date.today()
+    years = today_s_date.year - date_of_the_start_of_sales.year
 
     env = Environment(
         loader=FileSystemLoader('.'),
