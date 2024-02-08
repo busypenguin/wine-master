@@ -22,21 +22,21 @@ if __name__ == '__main__':
     excel_spreadsheet_of_wine = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
     all_products = excel_spreadsheet_of_wine.to_dict(orient='records')
 
-    list_drinks = []
-    list_white_wine = []
-    list_red_wine = []
-    dict_of_all_drinks = collections.defaultdict(list)
+    drinks = []
+    white_wine = []
+    red_wine = []
+    all_drinks = collections.defaultdict(list)
     for product in all_products:
         category = product['Категория']
         if category == 'Белые вина':
-            list_white_wine.append(product)
-            dict_of_all_drinks[category] = list_white_wine
+            white_wine.append(product)
+            all_drinks[category] = white_wine
         elif category == 'Красные вина':
-            list_red_wine.append(product)
-            dict_of_all_drinks[category] = list_red_wine
+            red_wine.append(product)
+            all_drinks[category] = red_wine
         else:
-            list_drinks.append(product)
-            dict_of_all_drinks[category] = list_drinks
+            drinks.append(product)
+            all_drinks[category] = drinks
 
     date_of_the_start_of_sales = date(1920, 1, 1)
     today_s_date = date.today()
@@ -52,7 +52,7 @@ if __name__ == '__main__':
     rendered_page = template.render(
         years=years,
         name_of_year=do_right_years(years),
-        dict_of_all_drinks=dict_of_all_drinks
+        all_drinks=all_drinks
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
