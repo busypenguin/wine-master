@@ -19,17 +19,13 @@ def do_right_years(years):
 
 
 if __name__ == '__main__':
-    
-    excel_spreadsheet_of_wine = pandas.read_excel(
-    'wine.xlsx', sheet_name='Лист1',
-    na_values=['N/A', 'NA'], keep_default_na=False
-    )
+    excel_spreadsheet_of_wine = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
     all_products = excel_spreadsheet_of_wine.to_dict(orient='records')
 
     list_drinks = []
     list_white_wine = []
     list_red_wine = []
-    dict_of_all_drinks=collections.defaultdict(list)
+    dict_of_all_drinks = collections.defaultdict(list)
     for product in all_products:
         category = product['Категория']
         if category == 'Белые вина':
@@ -59,9 +55,7 @@ if __name__ == '__main__':
         dict_of_all_drinks=dict_of_all_drinks
     )
 
-
     with open('index.html', 'w', encoding="utf8") as file:
         file.write(rendered_page)
-        
     server = HTTPServer(('0.0.0.0', 8000), SimpleHTTPRequestHandler)
     server.serve_forever()
