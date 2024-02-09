@@ -3,6 +3,7 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from datetime import date
 import pandas
 import collections
+import argparse
 
 
 def do_right_years(years):
@@ -19,7 +20,14 @@ def do_right_years(years):
 
 
 if __name__ == '__main__':
-    excel_spreadsheet_of_wine = pandas.read_excel('wine.xlsx', sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
+    parser = argparse.ArgumentParser(
+        description='Можете выбрать из какого файла будут взяты данные'
+    )
+    parser.add_argument("--file_name", help="Название файла", type=str, default='wine.xlsx')
+    args = parser.parse_args()
+    file_name = args.file_name
+
+    excel_spreadsheet_of_wine = pandas.read_excel(file_name, sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
     all_products = excel_spreadsheet_of_wine.to_dict(orient='records')
 
     drinks = []
