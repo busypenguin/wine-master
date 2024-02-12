@@ -30,21 +30,10 @@ if __name__ == '__main__':
     excel_spreadsheet_of_wine = pandas.read_excel(file_name, sheet_name='Лист1', na_values=['N/A', 'NA'], keep_default_na=False)
     all_products = excel_spreadsheet_of_wine.to_dict(orient='records')
 
-    drinks = []
-    white_wine = []
-    red_wine = []
     all_drinks = collections.defaultdict(list)
     for product in all_products:
         category = product['Категория']
-        if category == 'Белые вина':
-            white_wine.append(product)
-            all_drinks[category] = white_wine
-        elif category == 'Красные вина':
-            red_wine.append(product)
-            all_drinks[category] = red_wine
-        else:
-            drinks.append(product)
-            all_drinks[category] = drinks
+        all_drinks[category].append(product)
 
     today_s_date = date.today()
     years = today_s_date.year - 1920
