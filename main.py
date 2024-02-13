@@ -35,8 +35,9 @@ if __name__ == '__main__':
         category = product['Категория']
         all_drinks[category].append(product)
 
+    date_of_the_start_of_sales = 1920
     today_s_date = date.today()
-    years = today_s_date.year - 1920
+    years = today_s_date.year - date_of_the_start_of_sales
 
     env = Environment(
         loader=FileSystemLoader('.'),
