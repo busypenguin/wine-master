@@ -21,9 +21,9 @@ def do_right_years(years):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(
-        description='Можете выбрать из какого файла будут взяты данные'
+        description='Выбор xlsx файла для выгрузки товаров на сайт, по-умолчанию выбран wine.xlsx файл'
     )
-    parser.add_argument("--file_name", help="Название файла", type=str, default='wine.xlsx')
+    parser.add_argument("--file_name", help="Название xlsx файла для выгрузки товаров на сайт", type=str, default='wine.xlsx')
     args = parser.parse_args()
     file_name = args.file_name
 
